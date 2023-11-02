@@ -1,0 +1,18 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", "config:recommended"],
+  "prConcurrentLimit": 5,
+  "automergeType": "branch",
+  "automergeMajor": false,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [".*Dockerfile"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sENV .*?_VERSION=\"(?<currentValue>.*)\"\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ],
+  "reviewers": ["wilsonehusin"]
+}
